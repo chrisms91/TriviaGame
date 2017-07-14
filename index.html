@@ -5,9 +5,7 @@
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Star Wars RPG Game!</title>
-
-	<!-- Latest compiled and minified CSS -->
+	<!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Style.css -->
@@ -17,10 +15,69 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 
+
 	<title>Trivia Game!</title>
 </head>
 <body>
-	
+
+<div class="wrapper">
+
+	<!-- Quiz Status Board -->
+	<div class="container-fluid status-board">
+		<!-- Header -->
+		<div class="row">
+			<div class="col-xs-12 text-center header">
+				<h1> TRIVIA GAME </h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-4 text-center">
+				<div id=" quiz-score">
+					<h2> 1/6 </h2>
+					<p>QuizScores</p>
+				</div>
+			</div>
+
+			<!-- Timer container -->
+			<div class="col-xs-4 text-center">
+				<div id="quiz-timer">
+					<div class="item html">
+					    <h2 id="timer-count">0</h2>
+					    <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+					     <g>
+					      <title>Layer 1</title>
+					      <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#68d6c6" fill="none"/></circle>
+					     </g>
+					    </svg>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-4 text-center">
+				<div id="quiz-point">
+					<h2> 50 </h2>
+					<p>Points</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Quiz-Content -->
+	<div class="container-fluid main-board">
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<div id="quiz-container">
+					<h1> quiz-container </h1>
+				</div>
+				<div id="choice-container">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
 
 
 <script type="text/javascript" src="assets/javascript/app.js"></script>
