@@ -1,24 +1,50 @@
-
-body {
+html, body{
+	height: 100%;
 	background: #333;
+	overflow-x: hidden;
+	position: relative;
 }
-
 
 .main-board {
 	color: #E1E8EB;
-	padding: 10% 15% 5% 15%;
+	padding: 4% 11%;
 }
 
 .status-board {
 	background: #3498db;
 	color: #E1E8EB;
-	padding: 7% 11% 5% 11%;
+	padding: 4% 11%;
 }
 
 .header {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 }
 
+.logo {
+	width: 30%;
+	height: auto;
+	margin-bottom: 30px;
+}
+
+/* Choices */
+
+.choice {
+	background: #888;
+	border: 1px solid black;
+	border-radius: 20px;
+	color: #c1c1c1;
+	width: 100%;
+	margin-top: 1em;
+	padding: .5em;
+	font-size: 1.5em;
+	transition: all 0.4s;
+}
+
+.choice:hover {
+	transform: scale(1.1);
+	color: white;
+	background: #ababad;
+}
 
 /********
 	Timer

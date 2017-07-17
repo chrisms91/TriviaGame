@@ -14,6 +14,9 @@
 	<!-- jQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
 
 
 	<title>Trivia Game!</title>
@@ -22,60 +25,64 @@
 
 <div class="wrapper">
 
-	<!-- Quiz Status Board -->
-	<div class="container-fluid status-board">
-		<!-- Header -->
-		<div class="row">
-			<div class="col-xs-12 text-center header">
-				<h1> TRIVIA GAME </h1>
-			</div>
-		</div>
+	<div id="page-1" class="page">
 
-		<div class="row">
-			<div class="col-xs-12 col-md-4 text-center">
-				<div id=" quiz-score">
-					<h2> 1/6 </h2>
-					<p>QuizScores</p>
+	</div>
+		<!-- Quiz Status Board -->
+		<div class="container-fluid status-board">
+			<!-- Header -->
+			<div class="row">
+				<div class="col-xs-12 text-center header">
+					<img class="img-fluid center-block animated zoomIn logo" src="assets/images/img-logo.png">
 				</div>
 			</div>
 
-			<!-- Timer container -->
-			<div class="col-xs-12 col-md-4 text-center">
-				<div id="quiz-timer">
-					<div class="item html">
-					    <h2 id="timer-count">0</h2>
-					    <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
-					     <g>
-					      <title>Layer 1</title>
-					      <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#68d6c6" fill="none"/></circle>
-					     </g>
-					    </svg>
+			<div class="row">
+				<div class="col-xs-12 col-md-4 text-center">
+					<div id=" quiz-score">
+						<h2> 1/6 </h2>
+						<p>QuizScores</p>
+					</div>
+				</div>
+
+				<!-- Timer container -->
+				<div class="col-xs-12 col-md-4 text-center">
+					<div id="quiz-timer">
+						<div class="item html">
+						    <h2 id="timer-count">0</h2>
+						    <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+						     <g>
+						      <title>Layer 1</title>
+						      <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="#68d6c6" fill="none"/></circle>
+						     </g>
+						    </svg>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xs-12 col-md-4 text-center">
+					<div id="quiz-point">
+						<h2> 50 </h2>
+						<p>Points</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Quiz-Content -->
+		<div class="container-fluid main-board">
+			<div class="row">
+				<div class="col-sm-12 text-center">
+					<div id="quiz-container">
+
+					</div>
+					<div id="choice-container">
+
 					</div>
 				</div>
 			</div>
-
-			<div class="col-xs-12 col-md-4 text-center">
-				<div id="quiz-point">
-					<h2> 50 </h2>
-					<p>Points</p>
-				</div>
-			</div>
-
 		</div>
-	</div>
-
-	<!-- Quiz-Content -->
-	<div class="container-fluid main-board">
-		<div class="row">
-			<div class="col-sm-12 text-center">
-				<div id="quiz-container">
-					<h1> quiz-container </h1>
-				</div>
-				<div id="choice-container">
-				</div>
-			</div>
-		</div>
-	</div>
 
 </div>
 
