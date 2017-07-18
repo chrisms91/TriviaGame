@@ -75,14 +75,14 @@ var gameObject = {
 		},
 		{
 			point: 60,
-			question: 'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?',
-			choices: ['last( )', 'put( )', 'push( )', 'Non of the above'],
+			question: 'How does a WHILE loop start?',
+			choices: ['while (i <= 10)', 'while (i <= 10; i++)', 'while i = 1 to 10', 'while (i = 0; i <= 5; i++)'],
 			answer: 2
 		},
 		{
 			point: 70,
-			question: 'Which of the following function of String object returns the index within the calling String object of the first occurrence of the specified value?',
-			choices: ['substr( )', 'search( )', 'lastIndexOf( )', 'indexOf( )'],
+			question: 'Which operator is used to assign a value to a variable?',
+			choices: ['*', '===', '+', '='],
 			answer: 4
 		},
 		{
@@ -94,29 +94,29 @@ var gameObject = {
 		},
 		{
 			point: 90,
-			question: 'Which operator is used to assign a value to a variable?',
-			choices: ['*', '===', '+', '='],
-			answer: 4
+			question: 'Which of the following function of String object returns the index within the calling String object of the first occurrence of the specified value?',
+			choices: ['indexOf( )', 'search( )', 'lastIndexOf( )', 'substr( )'],
+			answer: 1
 		},
 		{
 			point: 100,
-			question: 'How does a WHILE loop start?',
-			choices: ['while (i <= 10)', 'while (i <= 10; i++)', 'while i = 1 to 10', 'while (i = 0; i <= 5; i++)'],
-			answer: 1
+			question: 'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?',
+			choices: ['last( )', 'put( )', 'push( )', 'Non of the above'],
+			answer: 3
 		}
 	],
 
 	updateScoreBoard: function () {
 		$('.quiz-status').html(
 
-			'<h2>' + gameObject.questionNumber + ' / ' + gameObject.questions.length + '</h2>' +
-			'<p>Question Status</p>' 
+			'<h3>' + gameObject.questionNumber + ' / ' + gameObject.questions.length + '</h3>' +
+			'<p>Question Number</p>' 
 
 		);
 
 		$('.quiz-point').html(
 			
-			'<h2>' + gameObject.score + '</h2>' + 
+			'<h3>' + gameObject.score + '</h3>' + 
 			'<p>Total Point</p>'
 		);
 	},
@@ -132,7 +132,7 @@ var gameObject = {
 
 		//append question
 		$('.quiz-container').append(
-			'<h3 class="animated fadeIn">' + gameObject.questionNumber + '. ' + gameObject.questions[gameObject.questionIndex].question + '</h3>'
+			'<h4 class="animated fadeIn">' + gameObject.questions[gameObject.questionIndex].question + '</h4>'
 		);
 
 		//append choices
@@ -147,13 +147,19 @@ var gameObject = {
 			'</div>'
 		);
 
+		console.log(" ");
+		console.log("Question Number: " + gameObject.questionNumber);
+		console.log("questionIndex: " + gameObject.questionIndex);
+		console.log("Correct Answer is: " + gameObject.questions[gameObject.questionIndex].answer);
+		console.log(" ");
+
 		gameObject.timer();
 		gameObject.questionNumber++;
-
-		console.log("Correct Answer is: " + gameObject.questions[gameObject.questionIndex].answer);
 	},
 
+	//Timer function, use svg and animation to stroke circular timer.
 	timer: function () {
+
 		$('.quiz-timer').removeClass('hide');
 		
 		var initialOffset = '440';
@@ -164,11 +170,8 @@ var gameObject = {
 
 			$('#timer-count').text(currentTime);
 			$('.circle_animation').css('stroke-dashoffset', initialOffset-(i*(initialOffset/gameObject.time)));
-	    	// console.log("Time remaining: " + currentTime);
+	    	
 	    	currentTime--;
-
-	    	console.log(currentTime);
-
 
 	    	//When time is over
 	    	if (currentTime === 0){
@@ -194,14 +197,11 @@ var gameObject = {
 
 		}, 1000);
 
+		//handle multiple choices click event 
 		$('.choice').on( 'click', function (event){
 
 			var selected = $(this).attr('id');
 			var selectedAsInt = parseInt(selected);
-
-			console.log("questionIndex: " + gameObject.questionIndex);
-			console.log("questionNumber: " + gameObject.questionNumber);
-
 
 			clearInterval(timer);
 
@@ -222,13 +222,14 @@ var gameObject = {
 		});
 	},
 
+	//Evaluate answers
 	evalAnswer: function (choice) {
 
 		var correctAnswer = gameObject.questions[gameObject.questionIndex].answer;
 
+		console.log("------------------ Status ---------------------------------------");
 		console.log("evalAnswer() --------- correctAnswer: " + correctAnswer);
 		console.log("evalAnswer() --------- choice: " + choice);
-		console.log("---------------------------------------------------------");
 
 		if ( choice === correctAnswer ) {
 
@@ -251,16 +252,20 @@ var gameObject = {
 
 		}
 
+
+		console.log("---------------------------- Result Display -----------------------------")
 		console.log("evalAnswer() --------- correct number: " + gameObject.correctNumber);
 		console.log("evalAnswer() --------- incorrect number: " + gameObject.incorrectNumber);
 		console.log("evalAnswer() --------- unanswered number: " + gameObject.unansweredQuestion);
+		console.log("--------------------------------------------------------------------------");
 
 	},
 
+	//Render Result Page.
 	calcResult: function () {
 
 		$('.main-board').empty();
-		$('.quiz-timer').remove();
+		$('.status-board').empty();
 
 		if (gameObject.questionNumber === 11) {
 
@@ -269,14 +274,33 @@ var gameObject = {
 			);
 
 			setTimeout( function () {
+
 				$('.main-board').empty();
-				$('.main-board').append(
-					'<button class="waves-effect waves-light btn-large btn-flat tooltipped" data-position="right" data-delay="50" data-tooltip="Click To Reload Game." id="resetBtn" onClick="location.reload();">Play Again?</button>' + 
-					'<h3>Correct Answer: ' + gameObject.correctNumber + '</h3>' + 
-					'<h3>Incorrect Answer: ' + gameObject.incorrectNumber + '</h3>' + 
-					'<h3>Unanswered Questions: ' + gameObject.unansweredQuestion + '</h3>' + 
-					'<h2>Total Point: ' + gameObject.score + '</h2>'
-				);
+
+				if (gameObject.score === 550) {
+
+					$('.main-board').addClass('animated zoomIn').append(
+
+						'<h2>Congratulation! </h2>'+ 
+						'<h2>You Have Earned Maximum Points!</h2>' + 
+						'<br>' + 
+						'<button class="waves-effect waves-light btn-large btn-flat tooltipped" data-position="right" data-delay="50" data-tooltip="Click To Reload Game." id="resetBtn" onClick="location.reload();">Play Again?</button>'
+
+					)
+				} else {
+
+					$('.main-board').addClass('animated zoomIn').append( 
+
+						'<h3>Correct Answer: ' + gameObject.correctNumber + '</h3>' + 
+						'<h3>Incorrect Answer: ' + gameObject.incorrectNumber + '</h3>' + 
+						'<h3>Unanswered Questions: ' + gameObject.unansweredQuestion + '</h3>' + 
+						'<h2>Total Point: ' + gameObject.score + '</h2>' + 
+						'<br>' +
+						'<button class="waves-effect waves-light btn-large btn-flat tooltipped" data-position="right" data-delay="50" data-tooltip="Click To Reload Game." id="resetBtn" onClick="location.reload();">Play Again?</button>'
+
+					);
+				}
+				
 
 			}, 2500);
 		}
@@ -290,6 +314,10 @@ window.onload = function () {
 	$('.tooltipped').tooltip({
 		delay: 50
 	});
+
+	setTimeout ( function () {
+		$('#startBtn').removeClass('bounceInUp').addClass('infinite pulse');
+	}, 3500);
 
 	
 	$('#startBtn').on('click', function () {

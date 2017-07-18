@@ -1,10 +1,11 @@
+
 html, body{
 	height: 100%;
 	overflow-x: hidden;
 	position: relative;
 	background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3, #5bae83, #ae5b70);
 	background-size: 600% 600%;
-	animation: gradient 25s ease infinite;
+	animation: gradient 100s ease infinite;
 	font-family: 'Space Mono', monospace;
 	font-weight: 400;
 }
@@ -27,11 +28,15 @@ html, body{
 }
 
 .quiz-status {
-	padding-left: 70%;
+	padding-left: 60%;
+}
+
+.quiz-status h3, .quiz-point h3 {
+	color: #f1c40f;
 }
 
 .quiz-point {
-	padding-right: 70%;
+	padding-right: 60%;
 }
 
 .header {
@@ -41,8 +46,8 @@ html, body{
 .logo {
 	width: 100%;
 	height: auto;
-	margin-top: 30px;
-	margin-bottom: 30px;
+	margin-top: 50px;
+	margin-bottom: 70px;
 	margin-left: auto;
 	margin-right: auto;
 	font-family: 'Monoton', cursive;
@@ -79,7 +84,9 @@ html, body{
 	display: block;
 }
 
-/* Choices */
+/*--------------
+ 	Choices 
+ -------------*/
 
 .choice {
 	border: 3px solid white;
@@ -98,19 +105,19 @@ html, body{
 	border-color: #f1c40f;
 }
 
-/*************
-	Timer
-**************/
+
+/*-------------
+	 Timer
+--------------*/
 
 .item {
     position: relative;
-    
 }
 
 .item #timer-count {
     text-align:center;
     position: absolute;
-    line-height: 125px;
+    line-height: 110px;
     width: 100%;
 }
 
@@ -125,14 +132,16 @@ svg {
   transition: all 1s linear;
 }
 
-/*************************
+
+/*-------------------------
 	Gradient Background  
-**************************/
+---------------------------*/
+
 background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3);
 background-size: 600% 600%;
--webkit-animation: gradient 25s ease infinite;
--moz-animation: gradient 25s ease infinite;
--o-animation: gradient 25s ease infinite;
+-webkit-animation: gradient 50s ease infinite;
+-moz-animation: gradient 50s ease infinite;
+-o-animation: gradient 50s ease infinite;
 
 
 @-webkit-keyframes gradient {
@@ -156,22 +165,81 @@ background-size: 600% 600%;
     100%{background-position:90% 0%}
 }
 
-@media screen and (max-width: 576px) {
 
-	.main-board * {
-		font-size: 95%;
-	}
+/*---------------------------
+		Media Query
+----------------------------*/
 
-	.img-fluid.center-block {
-		width: 150px;
-	}
+@media screen and (max-width: 1025px){
 
-	.time-wrap, .triva-wrap h1,h2,h3,h4 {
+}
+
+@media screen and (max-width: 768px) {
+	.main-board * , .status-board * {
 		font-size: 99.5%;
 	}
 
+	.logo {
+		font-size: 50px;
+	}
+
+	#startBtn, #resetBtn {
+		font-size: 99%;
+	}
+
+
 	.choice {
 		padding: .25em;
+	}
+
+	.quiz-status {
+		padding-left: 0;
+		margin-bottom: 24px;
+	}
+
+	.quiz-point {
+		padding-right: 0;
+		margin-top: 24px;
+	}
+
+	svg {
+		width: 100;
+		height: 100;
+	}
+}
+
+@media screen and (max-width: 640px) {
+
+	.main-board * , .status-board * {
+		font-size: 98%;
+	}
+
+	.logo {
+		font-size: 50px;
+	}
+
+	#startBtn, #resetBtn {
+		font-size: 98%;
+	}
+
+
+	.choice {
+		padding: .25em;
+	}
+
+	.quiz-status {
+		padding-left: 0;
+		margin-bottom: 24px;
+	}
+
+	.quiz-point {
+		padding-right: 0;
+		margin-top: 24px;
+	}
+
+	svg {
+		width: 100;
+		height: 100;
 	}
 
 }
