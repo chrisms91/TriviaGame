@@ -38,8 +38,9 @@ var gameObject = {
 	incorrectNumber: 0,
 	answeredQuestion: 0,
 	unansweredQuestion: 0,
-	questionIndex: 6,
+	questionIndex: 0,
 	questionNumber: 1,
+	selectedIndex: 0,
 
 	questions: [
 		{
@@ -105,31 +106,193 @@ var gameObject = {
 		}
 	],
 
+	updateScoreBoard: function () {
+		$('.quiz-status').html(
+
+			'<h2>' + gameObject.questionNumber + ' / ' + gameObject.questions.length + '</h2>' +
+			'<p>Question Status</p>' 
+
+		);
+
+		$('.quiz-point').html(
+			
+			'<h2>' + gameObject.score + '</h2>' + 
+			'<p>Total Point</p>'
+		);
+	},
+
 	generateQuestions: function () {
-		$('#quiz-container').empty();
-		$('#choice-container').empty();
+
+		$('.intro').addClass('hide');
+
+		$('.quiz-container').empty();
+		$('.choice-container').empty();
+
+		gameObject.updateScoreBoard();
 
 		//append question
-		$('#quiz-container').append(
+		$('.quiz-container').append(
 			'<h3 class="animated fadeIn">' + gameObject.questionNumber + '. ' + gameObject.questions[gameObject.questionIndex].question + '</h3>'
 		);
 
 		//append choices
-		$('#choice-container').append(
+		$('.quiz-container').append(
 			'<div class="row justify-content-center animated fadeIn">' + 
 				'<div class="col-md-6 col-md-offset-3 col-sm-12 text-center">' + 
-					'<div id="0" class="choice">' + 'A.   ' + gameObject.questions[gameObject.questionIndex].choices[0] + '</div>' + 
-					'<div id="1" class="choice">' + 'B.   ' + gameObject.questions[gameObject.questionIndex].choices[1] + '</div>' +
-					'<div id="2" class="choice">' + 'C.   ' + gameObject.questions[gameObject.questionIndex].choices[2] + '</div>' +
-					'<div id="3" class="choice">' + 'D.   ' + gameObject.questions[gameObject.questionIndex].choices[3] + '</div>' +
+					'<div id="1" class="choice">' + 'A.   ' + gameObject.questions[gameObject.questionIndex].choices[0] + '</div>' + 
+					'<div id="2" class="choice">' + 'B.   ' + gameObject.questions[gameObject.questionIndex].choices[1] + '</div>' +
+					'<div id="3" class="choice">' + 'C.   ' + gameObject.questions[gameObject.questionIndex].choices[2] + '</div>' +
+					'<div id="4" class="choice">' + 'D.   ' + gameObject.questions[gameObject.questionIndex].choices[3] + '</div>' +
 				'</div>' +
 			'</div>'
 		);
 
+		gameObject.timer();
 		gameObject.questionNumber++;
+
+		console.log("Correct Answer is: " + gameObject.questions[gameObject.questionIndex].answer);
+	},
+
+	timer: function () {
+		$('.quiz-timer').removeClass('hide');
+		
+		var initialOffset = '440';
+		var currentTime = gameObject.time;
+		var i = 1;
+
+		var timer = setInterval(function () {
+
+			$('#timer-count').text(currentTime);
+			$('.circle_animation').css('stroke-dashoffset', initialOffset-(i*(initialOffset/gameObject.time)));
+	    	// console.log("Time remaining: " + currentTime);
+	    	currentTime--;
+
+	    	console.log(currentTime);
+
+
+	    	//When time is over
+	    	if (currentTime === 0){
+	    		//if there is next question, display next question and reset timer
+	    		if(gameObject.questionNumber < 11){
+
+	    			gameObject.evalAnswer();
+		    		gameObject.questionIndex++;
+		    		gameObject.generateQuestions();
+		    		clearInterval(timer);
+		    		console.log("Time is done! Go to next question");
+
+		    	//if there is no next question, calculate result of game
+	    		} else {
+
+	    			currentTime = 0;
+	    			clearInterval(timer);
+	    			gameObject.evalAnswer(undefined);
+	    			gameObject.calcResult();
+	    		}
+	    	}
+	    	i++;
+
+		}, 1000);
+
+		$('.choice').on( 'click', function (event){
+
+			var selected = $(this).attr('id');
+			var selectedAsInt = parseInt(selected);
+
+			console.log("questionIndex: " + gameObject.questionIndex);
+			console.log("questionNumber: " + gameObject.questionNumber);
+
+
+			clearInterval(timer);
+
+			if (gameObject.questionNumber < 11) {
+
+				gameObject.evalAnswer(selectedAsInt);
+				gameObject.questionIndex++;
+				gameObject.generateQuestions();
+
+			} else if (gameObject.questionNumber === 11) {
+
+				
+				gameObject.evalAnswer(selectedAsInt);
+				gameObject.calcResult();
+
+			}
+
+		});
+	},
+
+	evalAnswer: function (choice) {
+
+		var correctAnswer = gameObject.questions[gameObject.questionIndex].answer;
+
+		console.log("evalAnswer() --------- correctAnswer: " + correctAnswer);
+		console.log("evalAnswer() --------- choice: " + choice);
+		console.log("---------------------------------------------------------");
+
+		if ( choice === correctAnswer ) {
+
+			gameObject.correctNumber++;
+			gameObject.answeredQuestion++;
+			gameObject.score += gameObject.questions[gameObject.questionIndex].point;
+
+			// console.log('choice: ' + choice + ' /// ' + 'correct answer: ' + correctAnswer);
+
+		} else if ( choice !== correctAnswer && choice !== undefined) {
+
+			gameObject.incorrectNumber++;
+			gameObject.answeredQuestion++;
+
+			// console.log('choice: ' + choice + ' /// ');
+		
+		} else if (choice === undefined) {
+
+			gameObject.unansweredQuestion++;
+
+		}
+
+		console.log("evalAnswer() --------- correct number: " + gameObject.correctNumber);
+		console.log("evalAnswer() --------- incorrect number: " + gameObject.incorrectNumber);
+		console.log("evalAnswer() --------- unanswered number: " + gameObject.unansweredQuestion);
+
+	},
+
+	calcResult: function () {
+
+		$('.main-board').empty();
+		$('.quiz-timer').remove();
+
+		if (gameObject.questionNumber === 11) {
+
+			$('.main-board').append(
+				'<h1 class="animated infinite pulse">Calculating...</h1>'
+			);
+
+			setTimeout( function () {
+				$('.main-board').empty();
+				$('.main-board').append(
+					'<button class="waves-effect waves-light btn-large btn-flat tooltipped" data-position="right" data-delay="50" data-tooltip="Click To Reload Game." id="resetBtn" onClick="location.reload();">Play Again?</button>' + 
+					'<h3>Correct Answer: ' + gameObject.correctNumber + '</h3>' + 
+					'<h3>Incorrect Answer: ' + gameObject.incorrectNumber + '</h3>' + 
+					'<h3>Unanswered Questions: ' + gameObject.unansweredQuestion + '</h3>' + 
+					'<h2>Total Point: ' + gameObject.score + '</h2>'
+				);
+
+			}, 2500);
+		}
 	}
 }
 
+
+
 window.onload = function () {
-	gameObject.generateQuestions();
+
+	$('.tooltipped').tooltip({
+		delay: 50
+	});
+
+	
+	$('#startBtn').on('click', function () {
+		gameObject.generateQuestions();
+	});
 }

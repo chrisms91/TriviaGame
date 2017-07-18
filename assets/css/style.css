@@ -1,19 +1,37 @@
 html, body{
 	height: 100%;
-	background: #333;
 	overflow-x: hidden;
 	position: relative;
+	background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3, #5bae83, #ae5b70);
+	background-size: 600% 600%;
+	animation: gradient 25s ease infinite;
+	font-family: 'Space Mono', monospace;
+	font-weight: 400;
 }
+
 
 .main-board {
 	color: #E1E8EB;
-	padding: 4% 11%;
+	padding: 0% 11%;
 }
 
 .status-board {
-	background: #3498db;
+	/*background: #3498db;*/
 	color: #E1E8EB;
-	padding: 4% 11%;
+	padding: 4% -1% 11%;
+	margin-bottom: 30px;
+}
+
+.intro-section {
+	color: white;
+}
+
+.quiz-status {
+	padding-left: 70%;
+}
+
+.quiz-point {
+	padding-right: 70%;
 }
 
 .header {
@@ -21,18 +39,52 @@ html, body{
 }
 
 .logo {
-	width: 30%;
+	width: 100%;
 	height: auto;
+	margin-top: 30px;
 	margin-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: 'Monoton', cursive;
+	font-size: 80px;
+	text-align: center;
+	color: white;
+	letter-spacing: 5px;
+}
+
+#resetBtn, #startBtn {
+	border-radius: 6px;
+    border: 3px solid white;
+    line-height: 45px;
+    font-size: 1.5em;
+    color: #E1E8EB;
+    transition: all 0.4s;
+}
+
+#startBtn {
+	margin-top: 30px;
+}
+
+#resetBtn:hover, #startBtn:hover {
+	background: none;
+	border-color: #f1c40f;
+	color: #f1c40f;
+}
+
+.hide {
+	display: none;
+}
+
+.show {
+	display: block;
 }
 
 /* Choices */
 
 .choice {
-	background: #888;
-	border: 1px solid black;
+	border: 3px solid white;
 	border-radius: 20px;
-	color: #c1c1c1;
+	color: #E1E8EB;
 	width: 100%;
 	margin-top: 1em;
 	padding: .5em;
@@ -42,13 +94,13 @@ html, body{
 
 .choice:hover {
 	transform: scale(1.1);
-	color: white;
-	background: #ababad;
+	color: #f1c40f;
+	border-color: #f1c40f;
 }
 
-/********
+/*************
 	Timer
-*********/
+**************/
 
 .item {
     position: relative;
@@ -71,4 +123,55 @@ svg {
   stroke-dasharray: 440; /* this value is the pixel circumference of the circle */
   stroke-dashoffset: 440;
   transition: all 1s linear;
+}
+
+/*************************
+	Gradient Background  
+**************************/
+background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3);
+background-size: 600% 600%;
+-webkit-animation: gradient 25s ease infinite;
+-moz-animation: gradient 25s ease infinite;
+-o-animation: gradient 25s ease infinite;
+
+
+@-webkit-keyframes gradient {
+    0%{background-position:90% 0%}
+    50%{background-position:11% 100%}
+    100%{background-position:90% 0%}
+}
+@-moz-keyframes gradient {
+    0%{background-position:90% 0%}
+    50%{background-position:11% 100%}
+    100%{background-position:90% 0%}
+}
+@-o-keyframes gradient {
+    0%{background-position:90% 0%}
+    50%{background-position:11% 100%}
+    100%{background-position:90% 0%}
+}
+@keyframes gradient {
+    0%{background-position:90% 0%}
+    50%{background-position:11% 100%}
+    100%{background-position:90% 0%}
+}
+
+@media screen and (max-width: 576px) {
+
+	.main-board * {
+		font-size: 95%;
+	}
+
+	.img-fluid.center-block {
+		width: 150px;
+	}
+
+	.time-wrap, .triva-wrap h1,h2,h3,h4 {
+		font-size: 99.5%;
+	}
+
+	.choice {
+		padding: .25em;
+	}
+
 }
