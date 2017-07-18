@@ -107,6 +107,7 @@ var gameObject = {
 	],
 
 	updateScoreBoard: function () {
+
 		$('.quiz-status').html(
 
 			'<h3>' + gameObject.questionNumber + ' / ' + gameObject.questions.length + '</h3>' +
@@ -118,13 +119,13 @@ var gameObject = {
 			
 			'<h3>' + gameObject.score + '</h3>' + 
 			'<p>Total Point</p>'
+
 		);
 	},
 
 	generateQuestions: function () {
 
 		$('.intro').addClass('hide');
-
 		$('.quiz-container').empty();
 		$('.choice-container').empty();
 
@@ -132,11 +133,14 @@ var gameObject = {
 
 		//append question
 		$('.quiz-container').append(
+
 			'<h4 class="animated fadeIn">' + gameObject.questions[gameObject.questionIndex].question + '</h4>'
+
 		);
 
 		//append choices
 		$('.quiz-container').append(
+
 			'<div class="row justify-content-center animated fadeIn">' + 
 				'<div class="col-md-6 col-md-offset-3 col-sm-12 text-center">' + 
 					'<div id="1" class="choice">' + 'A.   ' + gameObject.questions[gameObject.questionIndex].choices[0] + '</div>' + 
@@ -145,6 +149,7 @@ var gameObject = {
 					'<div id="4" class="choice">' + 'D.   ' + gameObject.questions[gameObject.questionIndex].choices[3] + '</div>' +
 				'</div>' +
 			'</div>'
+
 		);
 
 		console.log(" ");
@@ -213,7 +218,7 @@ var gameObject = {
 
 			} else if (gameObject.questionNumber === 11) {
 
-				
+				currentTime = 0;
 				gameObject.evalAnswer(selectedAsInt);
 				gameObject.calcResult();
 
@@ -315,11 +320,12 @@ window.onload = function () {
 		delay: 50
 	});
 
+	//after 3.5sec, add animation on startBtn
 	setTimeout ( function () {
 		$('#startBtn').removeClass('bounceInUp').addClass('infinite pulse');
 	}, 3500);
 
-	
+	//start game
 	$('#startBtn').on('click', function () {
 		gameObject.generateQuestions();
 	});

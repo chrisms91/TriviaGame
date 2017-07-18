@@ -6,25 +6,34 @@ html, body{
 	background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3, #5bae83, #ae5b70);
 	background-size: 600% 600%;
 	animation: gradient 100s ease infinite;
+	-webkit-animation: gradient 50s ease infinite;
+	-moz-animation: gradient 50s ease infinite;
+	-o-animation: gradient 50s ease infinite;
 	font-family: 'Space Mono', monospace;
 	font-weight: 400;
 }
 
-
-.main-board {
-	color: #E1E8EB;
-	padding: 0% 11%;
+.hide {
+	display: none;
 }
+
+.show {
+	display: block;
+}
+
+.intro-section {
+	color: white;
+}
+
+/*-------------------
+	Status Board
+--------------------*/
 
 .status-board {
 	/*background: #3498db;*/
 	color: #E1E8EB;
 	padding: 4% -1% 11%;
 	margin-bottom: 30px;
-}
-
-.intro-section {
-	color: white;
 }
 
 .quiz-status {
@@ -43,6 +52,10 @@ html, body{
 	margin-bottom: 10px;
 }
 
+/*------------
+	Logo
+------------*/
+
 .logo {
 	width: 100%;
 	height: auto;
@@ -56,6 +69,10 @@ html, body{
 	color: white;
 	letter-spacing: 5px;
 }
+
+/*-------------
+	Button
+--------------*/
 
 #resetBtn, #startBtn {
 	border-radius: 6px;
@@ -76,12 +93,13 @@ html, body{
 	color: #f1c40f;
 }
 
-.hide {
-	display: none;
-}
+/*----------------
+	Main Board
+-----------------*/
 
-.show {
-	display: block;
+.main-board {
+	color: #E1E8EB;
+	padding: 0% 11%;
 }
 
 /*--------------
@@ -137,12 +155,9 @@ svg {
 	Gradient Background  
 ---------------------------*/
 
-background: linear-gradient(231deg, #f29492, #4568dc, #b06ab3);
-background-size: 600% 600%;
 -webkit-animation: gradient 50s ease infinite;
 -moz-animation: gradient 50s ease infinite;
 -o-animation: gradient 50s ease infinite;
-
 
 @-webkit-keyframes gradient {
     0%{background-position:90% 0%}
@@ -170,8 +185,27 @@ background-size: 600% 600%;
 		Media Query
 ----------------------------*/
 
-@media screen and (max-width: 1025px){
+@media screen and (max-width: 1288px){
 
+	.logo {
+		font-size: 65px;
+	}
+
+	.quiz-status h3, .quiz-point h3 {
+		font-size: 30px;
+	}
+}
+
+@media screen and (max-width: 991px){
+	.quiz-status {
+		padding-left: 0;
+		margin-bottom: 24px;
+	}
+
+	.quiz-point {
+		padding-right: 0;
+		margin-top: 24px;
+	}
 }
 
 @media screen and (max-width: 768px) {
